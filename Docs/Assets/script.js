@@ -24,7 +24,7 @@ THEN the saved events persist*/
 //link to elements on the page one single selector
 //use this Statements
       
-var now = moment();
+const now = moment();
 console.log(now.format("dddd, MMMM Do YYYY, h:mm:ss a"));
 document.getElementById("currentDay").textContent = now.format("dddd, MMMM Do YYYY, h:mm:ss a");  
 
