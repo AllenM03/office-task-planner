@@ -28,6 +28,7 @@ let todayDate = moment().format('dddd, MMM Do YYYY, HH');
 Format date displayed to include hour (0900AM to 0700PM)
 $("#currentDay").html(todayDate + "00");
 
+
 Initialize when ready//// this works also $(function() {
 $(document).ready(function () {
         //Retrieve local storage data if present
@@ -43,7 +44,7 @@ $(document).ready(function () {
         $("#6-hour .task").val(localStorage.getItem("6-PM"));
         $("#7-hour .task").val(localStorage.getItem("7-PM"));
     
-    Save-button click event listener 
+    Save-button click.event listener 
     $(".save-button").on("click", function () {
         Get nearby values of the description in JQuery
         let task//+project+// = $(this).siblings(".task").val();
