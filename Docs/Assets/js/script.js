@@ -1,84 +1,73 @@
-// //Assign value of date
-// let todayDate = moment().format('dddd, MMM Do YYYY, HH');
-
-// //Format date displayed to include hour (0900AM to 0700PM)
-// $("#currentDay").html(todayDate + "00");
-
-
-// //Initialize when ready//// this works also 
-// //$(document).ready(function () {
-//         //Retrieve local storage data if present
-// $(function() {
-//         $("#9-hour .task").val(localStorage.getItem("9-AM"));
-//         $("#10-hour .task").val(localStorage.getItem("10-AM"));
-//         $("#11-hour .task").val(localStorage.getItem("11-AM"));
-//         $("#12-hour .task").val(localStorage.getItem("12-PM"));
-//         $("#1-hour .task").val(localStorage.getItem("1-PM"));
-//         $("#2-hour .task").val(localStorage.getItem("2-PM"));
-//         $("#3-hour .task").val(localStorage.getItem("3-PM"));
-//         $("#4-hour .task").val(localStorage.getItem("4-PM"));
-//         $("#5-hour .task").val(localStorage.getItem("5-PM"));
-//         $("#6-hour .task").val(localStorage.getItem("6-PM"));
-//         $("#7-hour .task").val(localStorage.getItem("7-PM"));
-    
-//     //Save-button click.event listener 
-//     $(".save-button").on("click", function () {
-//         //Get nearby values of the description in JQuery
-//         let hour = $(this).parent().attr("id");
-
-//         //Save task to local storage
-//         localStorage.setItem(hour, task);
-//     })
-   
-//     //Begin hourKeeper function
-//     function hourKeeper() {
-
-//         //Get the current hour
-//         let currentHour = moment().hour();
-
-//         //SetLoop over the hour blocks
-//         $(".hour-block").each(function () {
-//             let hourBlock = parseInt($(this).attr("id").split("-hour")[0]);
-
-//             //Compare hour block to current hour
-//             if (hourBlock < currentHour) {
-//                 //Set background for past hour block
-//                 $(this).removeClass("future");
-//                 $(this).removeClass("present");
-//                 $(this).addClass("past");
-//             }
-//             else if (hourBlock === currentHour) {
-//                 //Set background for tasks current hour block
-//                 $(this).removeClass("past");
-//                 $(this).removeClass("future");
-//                 $(this).addClass("present");
-//             }
-//             else {
-//                 //Set background for future hour blocks
-//                 $(this).removeClass("present");
-//                 $(this).removeClass("past");
-//                 $(this).addClass("future");
-//             }
-//         });
-//     }
-// Initialize hourKeeper
-//     hourKeeper();
-// })
-
-//global variables
+// Used const for these as they are not changed
 const timeBlockEl = $('.timeblock');
 const buttonEl = $('.btn');
-
-//counts the timeBlocks in the html file. This will also be used in the for loops in differnt functions
+// counts the timeblocks in the HTML file and would be used in the for loops in several functions
 const blockCount = timeBlockEl.children().length;
 
-//adds the date to the jumbotron
-Date.prototype.addHours = function(h) {    
-    this.setTime(this.getTime() + (h*60*60*1000)); 
-    return this;   
- }
- // This function gets the current time and injects it into the DOM
+//Adds the date to the jumbotron
+function setDate() {
+    var timeDisplay = moment();
+    $('#currentDay').text(timeDisplay.format("dddd, MMMM Do YYYY, HH:mm:ss"));
+    
+}
 
- function updateClock() {
-     // Gets the current time
-     var now = new Date();
+// sets background color of the timeblocks depending on the current time
+function checkTimeBlock() {    
+    var currentHour = moment().format('MM-DD-YYYY h:mm A');
+    var timeBlock = '';
+    var timeBlockID = '';
+
+    for (var i = 0; i < blockCount; i++) {
+        //get id of the textarea (child of the div in the class timeblock) and transform it as a datetime string value
+        timeBlockID = $(".timeblock div textarea").eq(i).attr("id");
+        timeBlock = moment(moment().format('MM-DD-YYYY')+' '+moment(timeBlockID,'hA').format('h:mm A'),'MM-DD-YYYY h:mm A');
+        timeBlock = checkTimeDiff(currentHour, timeBlock);
+
+        if (timeBlock < 0) {
+            // for timeblocks greater than current time changes to green
+            $(`#${timeBlockID}`).addClass('bg-success');
+        } else if (timeBlock > 1) {
+            // for timeblocks less than current time changes to gray
+            $(`#${timeBlockID}`).addClass('bg-secondary');
+        } else {
+            // for timeblocks equal to current time changes to red
+            $(`#${timeBlockID}`).addClass('bg-danger');
+        }
+    }
+}
+
+// function for comparing the current time with the timeblock and returns their difference in hours
+function checkTimeDiff(currentHour, timeBlock) {
+    var timeDiff = 0;
+    // get difference of timeblock time to the current time in hours
+    var timeDiff = moment(currentHour,'MM-DD-YYYY h:mm A').diff(timeBlock, 'hours',true);
+    return timeDiff;
+}
+
+// loads the events stored in localStorage
+function printSavedSched() {
+    var textArea = '';
+    var storedVal = '';
+    var currDate =  moment().format('MM-DD-YYYY');
+
+    // check all timeblocks (child of div that is a child of class timeblock) if there's a corresponding key in localStorage
+    for (var i = 0; i < blockCount; i++) {
+        textArea = $(".timeblock div textarea").eq(i).attr("id");
+        // use value of currentdate and timeBlock as search selector
+        storedVal = localStorage.getItem(`${currDate} ${textArea}`);
+
+        // if it is found, load it to textArea
+        if (storedVal) {
+            $(`#${textArea}`).val(storedVal);
+        }
+    }
+}
+
+// do all of these when the page has finished loading
+function init() {
+    setDate();
+    checkTimeBlock();
+    printSavedSched();    
+}
+
+$(init());
