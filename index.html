@@ -19,17 +19,32 @@
       <p id="currentDay" class="lead"></p>
     </header>
     <div class="container mb-4">   
+
 <!-- Timeblocks for each hour go here -->
+    <form class="timeblock">
+      <div class="form-row p-2 border-top justify-content-around">
+        <div class="col-1 col-form-label d-flex align-items-center justify-content-center">
+        <label for="8AM">8:00</label>
+      </div>
+      <div class="col-9 col-md-9 col-lg-10">
+      <textarea class="form-control border-0 text-break text-light" id="08AM" rows="3"></textarea>
+      </div>
+      <div class="col-1 d-flex justify-content-center">
+        <button type="button" class="btn btn-outline-info btn-lg fas fa-save" data-time="08AM"></button>
+      </div>
+      </div>
+    </form>
+
     <form class="timeblock">
       <div class="form-row p-2 border-top justify-content-around">
         <div class="col-1 col-form-label d-flex align-items-center justify-content-center">
         <label for="9AM">9:00</label>
       </div>
       <div class="col-9 col-md-9 col-lg-10">
-      <textarea class="form-control border-0 text-break text-light" id="9AM" rows="3"></textarea>
+      <textarea class="form-control border-0 text-break text-light" id="09AM" rows="3"></textarea>
       </div>
       <div class="col-1 d-flex justify-content-center">
-        <button type="button" class="btn btn-outline-info btn-lg fas fa-save" data-time="9AM"></button>
+        <button type="button" class="btn btn-outline-info btn-lg fas fa-save" data-time="09AM"></button>
       </div>
      </div>
     </form>
@@ -159,8 +174,22 @@
       </div>
      </div>
     </form>
-      
+
+    <form class="timeblock">
+      <div class="form-row p-2 border-top justify-content-around">
+        <div class="col-1 col-form-label d-flex align-items-center justify-content-center">
+        <label for="7PM">7:00</label>
+      </div>
+      <div class="col-9 col-md-9 col-lg-10">
+      <textarea class="form-control border-0 text-break text-light" id="07PM" rows="3"></textarea>
+      </div>
+      <div class="col-1 d-flex justify-content-center">
+        <button type="button" class="btn btn-outline-info btn-lg fas fa-save" data-time="07PM"></button>
+      </div>
+     </div>
+    </form>
     </div>
+    <!-- End Timeblocks -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./docs/assets/js/script.js"></script>

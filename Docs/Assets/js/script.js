@@ -7,7 +7,7 @@ const blockCount = timeBlockEl.children().length;
 //Adds the date to the jumbotron
 function setDate() {
     var timeDisplay = moment();
-    $('#currentDay').text(timeDisplay.format("dddd, MMMM Do YYYY, hh:mm:ss"));
+    $('#currentDay').text(timeDisplay.format("dddd, MMMM Do YYYY, hh:mm:ss a"));
     
 }
 
