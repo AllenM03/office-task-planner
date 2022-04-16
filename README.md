@@ -13,4 +13,4 @@ Moment.js
 [Click here to view the deployed page!](https://allenm03.github.io/office-task-planner-/)
 
 ## Contributions
-Allen McBroom Bey
+[Allen McBroom Bey](https://github.com/AllenM03)
