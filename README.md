@@ -4,10 +4,10 @@ Office Task Planner is a webpage that lists every hour of the day (8am-7pm) as a
 ![Screenshot of portfolio](Docs/Assets/images/office-task-planner.png)
 
 ## Technologies Used
-HTML
-CSS
-JavaScript
-JQuery
+HTML <br/>
+CSS/Bootstrap <br/>
+JavaScript <br/>
+JQuery <br/>
 Moment.js
 
 [Click here to view the deployed page!](https://allenm03.github.io/office-task-planner-/)
