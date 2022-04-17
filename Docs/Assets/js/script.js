@@ -7,7 +7,7 @@ const blockCount = timeBlockEl.children().length;
 //Adds the date to the jumbotron
 function setDate() {
     var timeDisplay = moment();
-    $('#currentDay').text(timeDisplay.format("dddd, MMMM Do YYYY, hh:mm:ss a"));
+    $('#currentDay').text(timeDisplay.format("dddd, MMMM Do YYYY, hh:mm:ss"));
     
 }
 
@@ -57,8 +57,8 @@ function printSavedSched() {
         storedVal = localStorage.getItem(`${currDate} ${textArea}`);
 
         // if it is found, load it to textArea
-        if (storedVal) {
-            $(`#${textArea}`).val(storedVal);
+    if (storedVal) {
+        $(`#${textArea}`).val(storedVal);
         }
     }
 }
