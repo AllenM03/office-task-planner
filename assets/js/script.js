@@ -63,6 +63,15 @@ function printSavedSched() {
     }
 }
 
+//saves task to local storage when user clicks the buttonEl
+timeBlockEl.on('click', '.btn', function (event) {
+
+    var timeBlock = $(event.target).attr('data-time');
+    var currDate =  moment().format('MM-DD-YYYY');
+    var textAreaValue = $(`#${timeBlock}`).val();
+    localStorage.setItem(`${currDate} ${timeBlock}`, textAreaValue);
+})
+
 // do all of these when the page has finished loading
 function init() {
     setDate();
